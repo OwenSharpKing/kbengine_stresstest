@@ -152,6 +152,7 @@ public class World : MonoBehaviour
 		// 那么如果不设置renderObj的位置和方向将为0，人物会陷入地下
 		set_position(avatar);
 		set_direction(avatar);
+		set_entityName(avatar, avatar.name);
 	}
 
 	public void onAddSkill(KBEngine.Entity entity)
@@ -224,54 +225,54 @@ public class World : MonoBehaviour
 		gameEntity.spaceID = KBEngineApp.app.spaceID;
 	}
 
-	public void set_HP(KBEngine.Entity entity, object v)
+	public void set_HP(KBEngine.Entity entity, Int32 v, Int32 HP_Max)
 	{
 		if(entity.renderObj != null)
 		{
-			((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().hp = "" + (Int32)v + "/" + (Int32)entity.getDefinedProperty("HP_Max");
+			((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().hp = "" + v + "/" + HP_Max;
 		}
 	}
 	
-	public void set_MP(KBEngine.Entity entity, object v)
+	public void set_MP(KBEngine.Entity entity, Int32 v, Int32 MP_Max)
 	{
 	}
 	
-	public void set_HP_Max(KBEngine.Entity entity, object v)
+	public void set_HP_Max(KBEngine.Entity entity, Int32 v, Int32 HP)
 	{
 		if(entity.renderObj != null)
 		{
-			((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().hp = (Int32)entity.getDefinedProperty("HP") + "/" + (Int32)v;
+			((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().hp = HP + "/" + v;
 		}
 	}
 	
-	public void set_MP_Max(KBEngine.Entity entity, object v)
+	public void set_MP_Max(KBEngine.Entity entity, Int32 v, Int32 MP)
 	{
 	}
 	
-	public void set_level(KBEngine.Entity entity, object v)
+	public void set_level(KBEngine.Entity entity, UInt16 v)
 	{
 	}
 	
-	public void set_entityName(KBEngine.Entity entity, object v)
+	public void set_entityName(KBEngine.Entity entity, string v)
 	{
 		if(entity.renderObj != null)
 		{
-			((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().entity_name = (string)v;
+			((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().entity_name = v;
 		}
 	}
 	
-	public void set_state(KBEngine.Entity entity, object v)
+	public void set_state(KBEngine.Entity entity, SByte v)
 	{
 		if(entity.renderObj != null)
 		{
-			((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().set_state((SByte)v);
+			((UnityEngine.GameObject)entity.renderObj).GetComponent<GameEntity>().set_state(v);
 		}
 		
 		if(entity.isPlayer())
 		{
 			Debug.Log("player->set_state: " + v);
 			
-			if(((SByte)v) == 1)
+			if(v == 1)
 				UI.inst.showReliveGUI = true;
 			else
 				UI.inst.showReliveGUI = false;
@@ -280,7 +281,7 @@ public class World : MonoBehaviour
 		}
 	}
 
-	public void set_moveSpeed(KBEngine.Entity entity, object v)
+	public void set_moveSpeed(KBEngine.Entity entity, Byte v)
 	{
 		float fspeed = ((float)(Byte)v) / 10f;
 		
@@ -290,11 +291,11 @@ public class World : MonoBehaviour
 		}
 	}
 	
-	public void set_modelScale(KBEngine.Entity entity, object v)
+	public void set_modelScale(KBEngine.Entity entity, Byte v)
 	{
 	}
 	
-	public void set_modelID(KBEngine.Entity entity, object v)
+	public void set_modelID(KBEngine.Entity entity, UInt32 v)
 	{
 	}
 	
